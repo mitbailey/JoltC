@@ -626,7 +626,7 @@ JPC_API JPC_ContactListener* JPC_ContactListener_new(
 
 JPC_API void JPC_ContactListener_delete(JPC_ContactListener* object);
 
-static const uint JPC_ContactPointsCapacity = 64;
+#define JPC_ContactPointsCapacity (64)
 
 typedef struct JPC_Impulse {
 	float ContactImpulse;				///< Estimated contact impulses (kg m / s)
