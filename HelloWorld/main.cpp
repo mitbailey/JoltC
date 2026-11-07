@@ -91,7 +91,7 @@ static JPC_DebugRendererSimpleFns Hello_DebugRenderer = {
 bool AssertFailedImpl(const char *inExpression, const char *inMessage, const char *inFile, uint inLine) {
 	// Print to the TTY
 	printf("%s: %u: (%s) ", inFile, inLine, inExpression);
-	if (inMessage != nullptr) {
+	if (inMessage != NULL) {
 		printf("%s", inMessage);
 	}
 	printf("\n");
@@ -111,9 +111,9 @@ int main() {
 
 	JPC_JobSystemThreadPool* job_system = JPC_JobSystemThreadPool_new2(JPC_MAX_PHYSICS_JOBS, JPC_MAX_PHYSICS_BARRIERS);
 
-	JPC_BroadPhaseLayerInterface* broad_phase_layer_interface = JPC_BroadPhaseLayerInterface_new(nullptr, Hello_BPL);
-	JPC_ObjectVsBroadPhaseLayerFilter* object_vs_broad_phase_layer_filter = JPC_ObjectVsBroadPhaseLayerFilter_new(nullptr, Hello_OVB);
-	JPC_ObjectLayerPairFilter* object_vs_object_layer_filter = JPC_ObjectLayerPairFilter_new(nullptr, Hello_OVO);
+	JPC_BroadPhaseLayerInterface* broad_phase_layer_interface = JPC_BroadPhaseLayerInterface_new(NULL, Hello_BPL);
+	JPC_ObjectVsBroadPhaseLayerFilter* object_vs_broad_phase_layer_filter = JPC_ObjectVsBroadPhaseLayerFilter_new(NULL, Hello_OVB);
+	JPC_ObjectLayerPairFilter* object_vs_object_layer_filter = JPC_ObjectLayerPairFilter_new(NULL, Hello_OVO);
 
 	const unsigned int cMaxBodies = 1024;
 	const unsigned int cNumBodyMutexes = 0;
@@ -138,7 +138,7 @@ int main() {
 
 	JPC_BoxShapeSettings floor_shape_settings;
 	JPC_BoxShapeSettings_default(&floor_shape_settings);
-	floor_shape_settings.HalfExtent = JPC_Vec3{100.0f, 1.0f, 100.0f};
+	floor_shape_settings.HalfExtent = (JPC_Vec3){100.0f, 1.0f, 100.0f};
 	floor_shape_settings.Density = 500.0;
 
 	JPC_Shape* floor_shape;
@@ -154,7 +154,7 @@ int main() {
 
 	JPC_BodyCreationSettings floor_settings;
 	JPC_BodyCreationSettings_default(&floor_settings);
-	floor_settings.Position = JPC_RVec3{0.0, -1.0, 0.0};
+	floor_settings.Position = (JPC_RVec3){0.0, -1.0, 0.0};
 	floor_settings.MotionType = JPC_MOTION_TYPE_STATIC;
 	floor_settings.ObjectLayer = HELLO_OL_NON_MOVING;
 	floor_settings.Shape = floor_shape;
@@ -178,7 +178,7 @@ int main() {
 
 	JPC_BodyCreationSettings sphere_settings;
 	JPC_BodyCreationSettings_default(&sphere_settings);
-	sphere_settings.Position = JPC_RVec3{0.0, 2.0, 0.0};
+	sphere_settings.Position = (JPC_RVec3){0.0, 2.0, 0.0};
 	sphere_settings.MotionType = JPC_MOTION_TYPE_DYNAMIC;
 	sphere_settings.ObjectLayer = HELLO_OL_MOVING;
 	sphere_settings.Shape = sphere_shape;
@@ -187,12 +187,12 @@ int main() {
 	JPC_BodyID sphere_id = JPC_Body_GetID(sphere);
 	JPC_BodyInterface_AddBody(body_interface, sphere_id, JPC_ACTIVATION_ACTIVATE);
 
-	JPC_BodyInterface_SetLinearVelocity(body_interface, sphere_id, JPC_Vec3{0.0, -5.0, 0.0});
+	JPC_BodyInterface_SetLinearVelocity(body_interface, sphere_id, (JPC_Vec3){0.0, -5.0, 0.0});
 
-	JPC_DebugRendererSimple* debug_renderer = JPC_DebugRendererSimple_new(nullptr, Hello_DebugRenderer);
+	JPC_DebugRendererSimple* debug_renderer = JPC_DebugRendererSimple_new(NULL, Hello_DebugRenderer);
 	JPC_BodyManager_DrawSettings draw_settings;
 	JPC_BodyManager_DrawSettings_default(&draw_settings);
-	JPC_PhysicsSystem_DrawBodies(physics_system, &draw_settings, debug_renderer, nullptr);
+	JPC_PhysicsSystem_DrawBodies(physics_system, &draw_settings, debug_renderer, NULL);
 
 	JPC_PhysicsSystem_OptimizeBroadPhase(physics_system);
 
